@@ -1,0 +1,16 @@
+[
+  {
+    "CCCD": "123456789",
+    "hoTen": "Nguyen Van A",
+    "namSinh": "1995",
+    "gioiTinh": 0,
+    "queQuan": "Ha Noi"
+  },
+  {
+    "CCCD": "987654321",
+    "hoTen": "Tran Thi B",
+    "namSinh": "1997",
+    "gioiTinh": 1,
+    "queQuan": "Da Nang"
+  }
+]
