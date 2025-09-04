@@ -8,6 +8,31 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  String message = ""; // Thông báo tình trạng login
+
+  void login() {
+    final String userName = userNameController.text;
+    final String password = passwordController.text;
+
+    setState(() {
+      if (userName.isEmpty || password.isEmpty) {
+        message = "Nhập vào tài khoản và mật khẩu";
+      } else if (userName == "admin" && password == "1") {
+        message = "Đăng nhập thành công";
+      } else {
+        message = "Sai tài khoản hoặc mật khẩu";
+      }
+    });
+  }
+
+  void register() {
+    setState(() {
+      message = "Chuyển sang màn hình đăng ký (chưa làm)";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,38 +40,55 @@ class _LoginState extends State<Login> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            //Text tài khoản
+            // TextField tài khoản
             TextField(
-              keyboardType: TextInputType.text,
+              controller: userNameController,
               decoration: InputDecoration(
                 hintText: 'Tài khoản',
                 border: OutlineInputBorder(),
               ),
             ),
-
-            //Giãn khoảng cách
             SizedBox(height: 20),
 
-            //Text mật khẩu
+            // TextField mật khẩu
             TextField(
-              keyboardType: TextInputType.text,
+              controller: passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Mật khẩu',
                 border: OutlineInputBorder(),
               ),
             ),
-
-            //Giãn khoảng cách
             SizedBox(height: 20),
 
-            //Button login
-            ElevatedButton(onPressed: login, child: Text("Login")),
+            // Text hiển thị message
+            Text(
+              message,
+              style: TextStyle(
+                fontSize: 16,
+                color: message == "Đăng nhập thành công"
+                    ? Colors.green
+                    : Colors.red,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Row chứa 2 nút
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: login, child: Text("Đăng nhập")),
+                ElevatedButton(
+                  onPressed: register,
+                  child: Text("Tôi chưa có tài khoản"),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-void login() {}
